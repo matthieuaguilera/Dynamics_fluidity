@@ -9,7 +9,7 @@ Originally developed for atmospheric sciences (Faranda et al., 2017), it was rec
 This example shows how to apply the toolbox to EEG recordings, following the procedure from Aguilera et al., 2025.
 
 ### Data
-Here we provide an example of pre-processed 30 channels EEG recording with a sampling frequency of 1000Hz.
+Here we provide an example of 100 seconds of pre-processed 30 channels EEG recording with a sampling frequency of 1000Hz.
 
 ```
 % Loading the EEG data
