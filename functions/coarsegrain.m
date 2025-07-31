@@ -24,6 +24,7 @@
 %                    - 'ms'            : milliseconds
 %
 %   'Fs'         : Sampling frequency (in Hz). Required if unit is 's' or 'ms'
+%   'coarsetype' : Calculus used to coarsegrain, can be 'mean' or 'median'. Default is 'mean'
 %
 % --- OUTPUTS ---
 %   Coa_Sig      : Coarsegrained signal matrix [C × N]
@@ -58,6 +59,7 @@ p = inputParser;
 addParameter(p, 'step', nan);
 addParameter(p, 'unit', 'pts');
 addParameter(p, 'Fs', nan);
+addParameter(p, 'coarsetype', 'mean');
 parse(p, varargin{:});
 In = p.Results;
 
@@ -105,5 +107,10 @@ Coa_Sig = zeros(nChannels, q);
 for i = 1:q
     idx_start = (i-1)*step + 1;
     idx_end = idx_start + W - 1;
-    Coa_Sig(:,i) = mean(TS(:,idx_start:idx_end), 2);
+    switch In.coarsetype
+        case 'mean'
+        Coa_Sig(:,i) = mean(TS(:,idx_start:idx_end), 2);
+        case 'median'
+        Coa_Sig(:,i) = median(TS(:,idx_start:idx_end), 2);
+    end
 end
